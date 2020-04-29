@@ -17,7 +17,7 @@ int main()
 	ofstream mispelled;
 	ofstream returntext;
 	string book, dict;
-	myHash<string> dictlist, mispell; //binary tree objects for dictionary and mispelled words
+	myHash<string> dictlist, mispell; //hash objects for dictionary and mispelled words
 	Timer timer;
 	long long int compare = 0;
 	int indictcomp = 0;
@@ -38,7 +38,6 @@ int main()
 			cleanWord(dict);
 			dictlist.insert(dict);
 			opentext >> dict;
-			//cout << dictlist.getSize() << endl;
 		}
 	}
 	opentext.close();
@@ -68,9 +67,8 @@ int main()
 					else {
 						nondict++;
 						notdictcomp = notdictcomp + compare;
-						mispell.insert(book); //insert mispelled words in binary search tree
+						mispell.insert(book); //insert mispelled words in hash
 						compare = 0;
-						cout << mispell.getSize() << endl;
 					}
 				}
 				else
@@ -84,8 +82,8 @@ int main()
 	opentext.close();
 	timer.Stop();
 
-	/*
-	int mispellSize = mispell.getNumberOfNodes(); //figure out how big the mispelled words tree is
+	
+	int mispellSize = mispell.getSize(); //figure out how big the mispelled hash is
 	if (mispelled.is_open())
 	{
 		//print each element of the mispelled words tree on a text document
@@ -93,7 +91,7 @@ int main()
 		{
 			mispelled << mispell.elements() + '\n';
 		}
-	}*/
+	}
 	mispelled.close();
 
 	//find average compares per word
